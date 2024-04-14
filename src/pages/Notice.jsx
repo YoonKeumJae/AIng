@@ -1,4 +1,4 @@
-import { usePagination } from "../hooks/usePagination";
+import { usePagination } from "@hooks/usePagination";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
