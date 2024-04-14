@@ -1,25 +1,27 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div``;
-const ImgContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Img = styled.img`
+const Wrapper = styled.div`
   max-width: 100%;
-  height: 400px;
-  margin-bottom: 20px;
+  border: 4px solid var(--color-white);
+  border-radius: 10px;
+  padding: 20px 10px;
+`;
+
+const Img = styled.img`
+  width: 100%;
+  margin: 20px 0;
+`;
+const Title = styled.span`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-red);
 `;
 
 const Info = () => {
   return (
     <Wrapper>
-      <ImgContainer>
-        <Img src="/Logo.png" />
-      </ImgContainer>
-      <Img src="https://via.placeholder.com/800x400" />
+      <Title>Info</Title>
+      <Img src="/AboutUs.png" />
     </Wrapper>
   );
 };
