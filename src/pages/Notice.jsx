@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { usePagination } from "../hooks/usePagination";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -93,34 +93,8 @@ const getDummyData = () => {
 };
 
 const Notice = () => {
-  let pageLength = 3;
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentDataList, setCurrentDataList] = useState([]);
-  const [dataList, setDataList] = useState([]);
-
-  useEffect(() => {
-    const data = getDummyData();
-    setDataList(data);
-  }, []);
-
-  useEffect(() => {
-    const currentData = dataList.slice(
-      (currentPage - 1) * pageLength,
-      currentPage * pageLength
-    );
-    setCurrentDataList(currentData);
-  }, [currentPage, dataList, pageLength]);
-
-  const onClickPrev = () => {
-    if (currentPage === 1) return;
-    setCurrentPage(currentPage - 1);
-  };
-
-  const onClickNext = () => {
-    if (currentPage === Math.ceil(dataList.length / pageLength)) return;
-    setCurrentPage(currentPage + 1);
-  };
+  const {currentPage, currentDataList, onClickPrev, onClickNext} = usePagination(getDummyData, 3);
 
   return (
     <Wrapper>
