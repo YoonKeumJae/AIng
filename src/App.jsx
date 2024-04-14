@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Info from "./pages/Info";
-import Notice from "./pages/Notice";
-import Calendar from "./pages/Calendar";
-import Gallery from "./pages/Gallery";
-import Home from "./pages/Home";
+import Layout from "@pages/Layout";
+import Info from "@pages/Info";
+import Notice from "@pages/Notice";
+import Calendar from "@pages/Calendar";
+import Gallery from "@pages/Gallery";
+import Home from "@pages/Home";
 import GlobalStyle from "./GlobalStyle";
 
 function App() {
