@@ -27,6 +27,22 @@ const NavItem = styled(Link)`
   }
 `;
 
+const Divider = styled.hr`
+  border: 1px solid var(--color-white);
+`;
+
+const Button = styled.button`
+  border: 4px solid var(--color-white);
+  background: var(--color-white);
+  color: var(--color-black);
+  font-weight: bold;
+  &:hover {
+    background: var(--color-red);
+    border: 4px solid var(--color-red);
+    color: var(--color-black);
+  }
+`;
+
 const Layout = () => {
   return (
     <Wrapper>
@@ -38,6 +54,8 @@ const Layout = () => {
         <NavItem to="/gallery">Gallery</NavItem>
       </Header>
       <Outlet />
+      <Divider />
+      <Button>URP</Button>
     </Wrapper>
   );
 };
