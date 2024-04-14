@@ -2,22 +2,45 @@ import { usePagination } from "../hooks/usePagination";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width: 100%;
+  max-width: 100%;
+  border: 4px solid var(--color-white);
+  border-radius: 10px;
+  padding: 20px 0;
 `;
 
 const ListWrapper = styled.ul`
-  width: 100%;
-  background-color: #f0f0f0;
+  max-width: 100%;
   padding: 10px;
 `;
 
 const ListItem = styled.li`
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
-  border: 1px solid #e0e0e0;
+  padding: 5px 0;
+`;
+
+const Title = styled.span`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-red);
+`;
+
+const ButtonsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  margin: 0 10px;
+  background-color: var(--color-black);
+  color: var(--color-yellow);
+  border: none;
 `;
 
 const getDummyData = () => {
@@ -93,12 +116,13 @@ const getDummyData = () => {
 };
 
 const Notice = () => {
-
-  const {currentPage, currentDataList, onClickPrev, onClickNext} = usePagination(getDummyData, 3);
+  const { currentPage, currentDataList, onClickPrev, onClickNext } =
+    usePagination(getDummyData, 3);
 
   return (
     <Wrapper>
       <ListWrapper>
+      <Title>NOTICE</Title>
         {currentDataList.map((item) => (
           <ListItem key={item.id}>
             <span>{item.id}</span>
@@ -108,12 +132,12 @@ const Notice = () => {
           </ListItem>
         ))}
       </ListWrapper>
-      <hr />
-      <ul>
-        <button onClick={onClickPrev}>이전</button>
+
+      <ButtonsWrapper>
+        <Button onClick={onClickPrev}>{'<<'}</Button>
         <span>{currentPage}</span>
-        <button onClick={onClickNext}>다음</button>
-      </ul>
+        <Button onClick={onClickNext}>{'>>'}</Button>
+      </ButtonsWrapper>
     </Wrapper>
   );
 };
