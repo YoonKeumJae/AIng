@@ -5,6 +5,10 @@ import Notice from "@pages/Notice";
 import Calendar from "@pages/Calendar";
 import Gallery from "@pages/Gallery";
 import Home from "@pages/Home";
+import SignIn from "@pages/auth/SignIn";
+import SignUp from "@pages/auth/SignUp";
+import URPLayout from "@pages/URP/URPLayout";
+import ProtectRouter from "@routes/ProtectRouter";
 import GlobalStyle from "./GlobalStyle";
 
 function App() {
@@ -34,6 +38,22 @@ function App() {
           element: <Gallery />,
         },
       ],
+    },
+    {
+      path: "/URP",
+      element: (
+        <ProtectRouter>
+          <URPLayout />
+        </ProtectRouter>
+      ),
+    },
+    {
+      path: "/sign-in",
+      element: <SignIn />,
+    },
+    {
+      path: "/sign-up",
+      element: <SignUp />,
     },
   ]);
 
