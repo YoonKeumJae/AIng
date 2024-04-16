@@ -40,7 +40,7 @@ const Input = styled.input`
   font-size: 100%;
 `;
 
-const SigninButton = styled.button`
+const SignInButton = styled.button`
   width: 200px;
   height: 30px;
   border: none;
@@ -80,7 +80,7 @@ const SignIn = () => {
         <Form>
           <Input type="text" placeholder="email" />
           <Input type="password" placeholder="password" />
-          <SigninButton type="submit">Sign In</SigninButton>
+          <SignInButton type="submit">Sign In</SignInButton>
           <GoogleButton type="button">Google</GoogleButton>
         </Form>
         <span>
