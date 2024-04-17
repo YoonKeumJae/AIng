@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import GoogleBtn from "@components/GoogleBtn";
 import { useState } from "react";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -51,15 +52,6 @@ const SignInButton = styled.button`
   background-color: var(--color-green);
   margin-bottom: 10px;
   font-weight: bold;
-`;
-
-const GoogleButton = styled.button`
-  width: 200px;
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  background-color: white;
-  margin-bottom: 10px;
 `;
 
 const SignUpLink = styled.a`
@@ -120,7 +112,7 @@ const SignIn = () => {
             onChange={onChange}
           />
           <SignInButton type="submit">Sign In</SignInButton>
-          <GoogleButton type="button">Google</GoogleButton>
+          <GoogleBtn />
         </Form>
         <span>
           계정이 없으신가요?{" "}

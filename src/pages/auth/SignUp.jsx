@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import GoogleBtn from "@components/GoogleBtn";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -132,6 +133,7 @@ const SignUp = () => {
             onChange={onChange}
           />
           <SignUpButton type="submit">회원가입</SignUpButton>
+          <GoogleBtn />
         </Form>
         <span>
           계정이 있으신가요?
