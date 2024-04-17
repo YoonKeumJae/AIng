@@ -1,4 +1,4 @@
-import { auth } from "../../firebase";
+import { auth } from "../firebase";
 import { Navigate } from "react-router-dom";
 
 const ProtectRouter = ({ children }) => {

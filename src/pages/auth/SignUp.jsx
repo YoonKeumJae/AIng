@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -59,6 +62,48 @@ const SignInLink = styled.a`
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else {
+      setPasswordCheck(value);
+    }
+  };
+
+  const onSubmit = async (e) => {
+    console.log("onSubmit");
+    e.preventDefault();
+    if (password !== passwordCheck) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    if (email === "" || password === "" || passwordCheck === "") {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+    console.log("before try-catch");
+    try {
+      const credentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("success: ", credentials.user);
+      await updateProfile(credentials.user, {
+        displayName: email,
+      });
+      // navigate("/URP");
+    } catch (e) {
+      alert("error: ", e.message);
+    }
+  };
 
   const onClickSignIn = () => {
     navigate("/sign-in");
@@ -67,11 +112,26 @@ const SignUp = () => {
     <Wrapper>
       <FormWrapper>
         <Title>회원가입</Title>
-        <Form>
-          <Input type="text" placeholder="email" />
-          <Input type="password" placeholder="password" />
-          <Input type="password" placeholder="password check" />
-          <SignUpButton type="submit">Sign Up</SignUpButton>
+        <Form onSubmit={onSubmit}>
+          <Input
+            type="text"
+            placeholder="email"
+            name="email"
+            onChange={onChange}
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            name="password"
+            onChange={onChange}
+          />
+          <Input
+            type="password"
+            placeholder="password check"
+            name="passwordCheck"
+            onChange={onChange}
+          />
+          <SignUpButton type="submit">회원가입</SignUpButton>
         </Form>
         <span>
           계정이 있으신가요?

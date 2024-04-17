@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -69,6 +72,32 @@ const SignUpLink = styled.a`
 const SignIn = () => {
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "email") {
+      setEmail(value);
+    } else {
+      setPassword(value);
+    }
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (email === "" || password === "") {
+      alert("이메일과 비밀번호를 입력해주세요.");
+      return;
+    }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/URP");
+    } catch (e) {
+      console.log("로그인에 실패했습니다: ", e);
+    }
+  };
+
   const onClickSignUp = () => {
     navigate("/sign-up");
   };
@@ -77,14 +106,25 @@ const SignIn = () => {
     <Wrapper>
       <FormWrapper>
         <Title>SignIn</Title>
-        <Form>
-          <Input type="text" placeholder="email" />
-          <Input type="password" placeholder="password" />
+        <Form onSubmit={onSubmit}>
+          <Input
+            type="text"
+            placeholder="email"
+            name="email"
+            onChange={onChange}
+          />
+          <Input
+            type="password"
+            placeholder="password"
+            name="password"
+            onChange={onChange}
+          />
           <SignInButton type="submit">Sign In</SignInButton>
           <GoogleButton type="button">Google</GoogleButton>
         </Form>
         <span>
-          계정이 없으신가요? <SignUpLink onClick={onClickSignUp}>회원가입</SignUpLink>
+          계정이 없으신가요?{" "}
+          <SignUpLink onClick={onClickSignUp}>회원가입</SignUpLink>
         </span>
       </FormWrapper>
     </Wrapper>
